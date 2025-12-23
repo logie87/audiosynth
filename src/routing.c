@@ -1,0 +1,4 @@
+/*
+Maps CV channels to their analog destinations.
+Combines all modulation sources.
+*/

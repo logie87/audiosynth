@@ -1,0 +1,6 @@
+/*
+Per channel calibration.
+DAC code to volts convert and vice versa.
+Pitch scaling possibly.
+And whatever else is needed.
+*/
