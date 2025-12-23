@@ -29,7 +29,7 @@ int main(void) {
 
     for(;;) {
         now = initMicro();
-
+        appRx();
         // fast contorl tick
         // knobs or UI control -> params -> routing -> out
         if (due(now, &nextControl, controlPeriod)) {
