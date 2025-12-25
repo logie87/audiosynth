@@ -52,4 +52,20 @@ Communication protocol defines the proces that the parameters, state, and teleme
 ### Visualizer UI
 Hopefully this will "high-level" the information to make for a neat visualization of what is happening at all given stages. I'd assume there is some EQ control we can implement to further control the sound output by sending signals to the microcontroller, to sort of turn this into a DJ like board.
 
+
+### UI to Analog Circuitry Bridge
+From a wide perspective the UI sliders should send commands i.e "SET cutoff 0.75", command.c will store this into parameters, which lets routing.c compute the final cutoff CV, where cvout.c outputs to the DAC, so that analog VCF cutoff can change.
+
+The reverse needs to be true for physical changes to represent within the UI. 
+Say an analog signal, the Microcontroller reads this, meters.c computes the relevant information, telemetry.c sends it, which is shown in the UI. Of course if digital physical knobs can control the same thing, changing the UI value will not change the physical knob, though the value should be dynamic, responding to both physical and digital control.
+
+As for basic "formatting"
+UI to Physical
+SET <paramId> <value01> (general)
+ROUTE <srcId> <dstId> <amt01> (mod matrix)
+ROUTECLR (clears all routes)
+And Physical to UI
+TEL env=0.123, rms=0.456, peak=0.789.
+I think comma separation would be preferable.
+
 That's all for now, will come back to this later.
