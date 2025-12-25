@@ -2,7 +2,7 @@
 Programs and UI for a homemade analog audio synthesizer.
 
 
-# Project Scope
+## Project Scope
 
 Microcontroller gets all commands from user control via knobs, outputs control voltages via the DAC, samples signals for visualization. It also shoots all telemetry to the UI for user visualization.
 
@@ -12,44 +12,44 @@ It is all with a C-based firmware layer which is acting as the control and telem
 
 Everything mentioned here on is a goal to develop, so will be changing as it goes.
 
-## Power Structure
+### Power Structure
 The goal here is to provide stable voltage rails to define the amplitude of the instrument's output. Both having digital and analog power domains, local decoupling, and mass filtering so that bleeding is minimal. 
 
-## Analog Output
+### Analog Output
 The output converts the synth-level signals into audio that can be used with line-in electronics. This probably should have level controls, and some additional filtering. Will see what I get to.
 
-## VCO - Voltage Controlled Oscillator
+### VCO - Voltage Controlled Oscillator
 This is the primary sound source which produces periodic waveforms, being square, triangle, and saw, all of which define the initial timbre. 
 The main goal is voltage control, so an input control voltage shifts the oscillator's frequency which enables pitch control, sequencing, and forms the basis for proper modulation throughout each instrument (or one, lol).
 
-## Envelope Gen (ADSR)
+### Envelope Gen (ADSR)
 Produces time-varying control voltages to shape sound evolvement after a note. Creates contours like attack and release, as well as decay, which turns the continuous oscillator tone into distinct notes, and serves as a modulation source for filters, amplifiers, etc.
 
-## VCA - Voltage Controlled Amplifier
+### VCA - Voltage Controlled Amplifier
 Controls loudness under voltage control, so basically the main amplitude gate for the sound. It applies envelope to the audio signal so notes can start and stop clearly without much noise, dynamics can be properly shaped over time, and amplitude modulation effects can be properly introduced.
 
-## VCF - Voltage Controlled Filter
+### VCF - Voltage Controlled Filter
 Shapes the spectrum of the sound by attenuating or emphasizing frequency content, mostly through low, high, or band-pass. Voltage control of cutoff let the filter be swept manually driven by enevelopes or modualed LFOs (noted below), producing very good tonal movement which should match a classic analog synth feel.
 
-## LFO - Low Frequency Oscillator
+### LFO - Low Frequency Oscillator
 Generates slow waveforms used for modulation rather than direct audio out. Introduces cyclic paramater changes, being vibrato (pitch mod), tremolo (amplitude mod), or a filter wobble (cutoff mod), which provides a foundational motion source we can route to different places for a better sound depth.
 
-## DAC Output
+### DAC Output
 Converts digital control values into analog control voltages that can drive into the VCO, VCF, VCA, and all other voltage controlled points. Probably will do an R-2R ladder DAC and some buffering so that voltage updates are low-noise and actually usable.
 
-## Gate / Trigger Gen
+### Gate / Trigger Gen
 Gate and trigger signals represent the timing events, like note on and off, clock pulses, resets, envelope triggers, and some others. These are logic-level outputs that synchronize analog subsystems, as well as start envelopes, reset oscillators or LFOs, and coordinate all rhythmic behaviour, forming the timing skeleton that lets us turn continuous circuits into music events.
 
-## Control Inputs
+### Control Inputs
 All user controls for general sound design / performance. Still need to decide this, though hoping to have knobs for general control per instrument, and some digital EQ control via the visualizer. 
 
-## Microcontroller + Firmware
+### Microcontroller + Firmware
 Instrument coordinator to read physical controls, generate the gates / triggers, output DAC based control voltahes, compute monitoring values, and package telemetry for the UI.
 
-## Serial Protocol
+### Serial Protocol
 Communication protocol defines the proces that the parameters, state, and telemetry data flow between the synth and the UI. More on this at some point.
 
-## Visualizer UI
+### Visualizer UI
 Hopefully this will "high-level" the information to make for a neat visualization of what is happening at all given stages. I'd assume there is some EQ control we can implement to further control the sound output by sending signals to the microcontroller, to sort of turn this into a DJ like board.
 
 That's all for now, will come back to this later.
