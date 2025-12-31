@@ -10,6 +10,32 @@ Mostly for digital vs physical control.
 
 static float g_params[PARAM_MAX];
 
+typedef enum {
+    PARAM_OK = 0,
+    PARAM_ERR_BAD_ID,
+    PARAM_ERR_BAD_VAL
+} param_status_t;
+
+typedef struct {
+    uint16_t id;
+    const char *name;
+    float def;
+    float min;
+    float max;
+} param_def_t;
+
+static const param_def_t g_param_defs[] = {
+    {2, "attack", 0.1f, 0.0f, 1.0f},
+    {3, "decay", 0.5f, 0.0f, 1.0f},
+    {4, "sustain", 0.7f, 0.0f, 1.0f},
+    {5, "release", 0.3f, 0.0f, 1.0f},
+    // mains    
+    {10, "cutoff", 0.5f, 0.0f, 1.0f},
+    {11, "resonance", 0.2f, 0.0f, 1.0f},
+    {12, "vca_level", 0.0f, 0.0f, 1.0f},
+    // too add to later
+};
+
 void paramsInit(void) {
     for (int i = 0; i < PARAM_MAX; i++) g_params[i] = 0.0f;
 }
