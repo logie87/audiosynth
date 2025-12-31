@@ -69,6 +69,9 @@ int main(void) {
         // needed to check for data to ensure telemetry is never halted by stdin waiting for input.
         if (stdinAvailable()) { // if true, has some data ready to read.
             // read command from stdin
+            if (!fgets(buffer, sizeof(buffer), stdin)) {
+                break;
+            }
             if (fgets(buffer, sizeof(buffer), stdin) != NULL) {
                 size_t n = strlen(buffer);
                 while (n && (buffer[n - 1] == '\n' || buffer[n - 1] == '\r')) {
